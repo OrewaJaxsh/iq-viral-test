@@ -1,0 +1,1261 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindLab - IQ Test</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #8b5cf6;
+  --accent: #ec4899;
+  --dark: #1e1e2e;
+  --light: #f8f9fa;
+  --text: #2d3748;
+  --text-light: #718096;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #f5f3ff 0%, #f0f9ff 100%);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.nav-links button {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: color 0.3s;
+  padding: 4px 8px;
+}
+
+.nav-links button:hover {
+  color: var(--primary);
+}
+
+.page {
+  display: none;
+  animation: fadeIn 0.4s ease-in-out;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.page.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.landing-hero {
+  text-align: center;
+  padding: 40px 20px;
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-emoji {
+  font-size: 48px;
+  margin-bottom: 16px;
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: var(--text-light);
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(236, 72, 153, 0.1);
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.ad-slot {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+  border: 1px dashed rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  margin: 16px 0;
+  color: var(--text-light);
+  font-size: 12px;
+}
+
+.ad-slot::before {
+  content: "📢 Ad Space";
+  display: block;
+  margin-bottom: 4px;
+}
+
+.btn {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  width: 100%;
+}
+
+.btn-secondary:hover {
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.btn-danger {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 2px solid #991b1b;
+  width: 100%;
+}
+
+.btn-danger:hover {
+  background: #fecaca;
+}
+
+.btn-success {
+  background: #dcfce7;
+  color: #15803d;
+  border: 2px solid #15803d;
+  width: 100%;
+}
+
+.btn-success:hover {
+  background: #bbf7d0;
+}
+
+.btn-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-group .btn {
+  flex: 1;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.question-header {
+  margin-bottom: 24px;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.question-number {
+  font-size: 12px;
+  color: var(--text-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.question-tamil {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.question-english {
+  font-size: 13px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.option {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.option-tamil {
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.option-english {
+  font-size: 12px;
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+.option:hover {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.05);
+  transform: translateX(4px);
+}
+
+.option.selected {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(99, 102, 241, 0.2);
+  border-top: 4px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.loading-subtext {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.result-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(99, 102, 241, 0.15);
+  margin-bottom: 24px;
+}
+
+.result-emoji {
+  font-size: 64px;
+  margin-bottom: 16px;
+  display: inline-block;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.result-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.result-subtitle {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.score-display {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 16px 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.stat-item {
+  background: var(--light);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.share-requirement {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 24px 0;
+  text-align: center;
+}
+
+.share-requirement h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.share-counter {
+  display: flex;
+  justify-content: space-around;
+  margin: 16px 0;
+  padding: 16px;
+  background: white;
+  border-radius: 10px;
+}
+
+.share-count {
+  text-align: center;
+}
+
+.share-count-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.share-count-label {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease-out;
+}
+
+.modal-close {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-light);
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  clear: both;
+  color: var(--text);
+}
+
+.modal-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-light);
+}
+
+.modal-text p {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 12px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .question-text {
+    font-size: 16px;
+  }
+
+  .result-title {
+    font-size: 24px;
+  }
+
+  .score-display {
+    font-size: 40px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="nav-bar">
+    <div class="logo" onclick="goToPage('landing')">🧠 MindLab</div>
+    <div class="nav-links">
+      <button onclick="openModal('about')">About</button>
+      <button onclick="openModal('privacy')">Privacy</button>
+      <button onclick="openModal('contact')">Contact</button>
+    </div>
+  </div>
+
+  <div id="landing" class="page active">
+    <div class="landing-hero">
+      <div class="hero-emoji">🚀</div>
+      <span class="badge">Only 2% pass on first try!</span>
+      <h1 class="hero-title">Test Your IQ Today 🧠</h1>
+      <p class="hero-subtitle">
+        <strong>உங்கள் IQ தெரியுமா?</strong> [Know Your IQ?]
+        <br>Find your cognitive level in 5 minutes
+      </p>
+      
+      <div class="ad-slot"></div>
+
+      <button class="btn btn-primary" onclick="goToPage('userDetails')">
+        Start IQ Test ⚡
+      </button>
+
+      <p style="margin-top: 24px; font-size: 13px; color: var(--text-light);">
+        5 Questions • Share to Unlock Results • No Registration
+      </p>
+    </div>
+
+    <div style="text-align: center; padding-bottom: 40px;">
+      <h3 style="margin-bottom: 16px; color: var(--text);">Try Our Other Tests</h3>
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="switchTest('personality'); goToPage('userDetails')">
+          💭 <strong>Personality</strong>
+        </button>
+        <button class="btn btn-secondary" onclick="switchTest('luck'); goToPage('userDetails')">
+          🍀 <strong>Luck</strong>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="userDetails" class="page">
+    <div>
+      <div class="question-header">
+        <div class="question-number">Get Started</div>
+        <h2 style="font-size: 18px; font-weight: 700; color: var(--text); margin-top: 12px;"><strong>உங்களைப் பற்றி சொல்லுங்கள்</strong> [Tell us about yourself]</h2>
+      </div>
+
+      <div class="form-group">
+        <label><strong>உங்களின் பெயர்</strong> [Your Name]</label>
+        <input type="text" id="userName" placeholder="Enter your name" />
+      </div>
+
+      <div class="form-group">
+        <label><strong>உங்களின் வயது</strong> [Your Age]</label>
+        <select id="userAge">
+          <option>Select age range</option>
+          <option>13-18</option>
+          <option>19-25</option>
+          <option>26-35</option>
+          <option>36-50</option>
+          <option>50+</option>
+        </select>
+      </div>
+
+      <div class="ad-slot"></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="startTest()">
+      Next: First Question →
+    </button>
+  </div>
+
+  <div id="question1" class="page">
+    <div>
+      <div class="question-header">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 20%;"></div>
+        </div>
+        <div class="question-number">Question 1 of 5</div>
+        <div class="question-tamil" id="q1TextTamil"></div>
+        <div class="question-english" id="q1TextEnglish"></div>
+      </div>
+
+      <div class="ad-slot"></div>
+
+      <div class="options" id="q1Options"></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="goToQuestion(2)" id="q1Btn" disabled>
+      Next Question →
+    </button>
+  </div>
+
+  <div id="question2" class="page">
+    <div>
+      <div class="question-header">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 40%;"></div>
+        </div>
+        <div class="question-number">Question 2 of 5</div>
+        <div class="question-tamil" id="q2TextTamil"></div>
+        <div class="question-english" id="q2TextEnglish"></div>
+      </div>
+
+      <div class="ad-slot"></div>
+
+      <div class="options" id="q2Options"></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="goToQuestion(3)" id="q2Btn" disabled>
+      Next Question →
+    </button>
+  </div>
+
+  <div id="question3" class="page">
+    <div>
+      <div class="question-header">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 60%;"></div>
+        </div>
+        <div class="question-number">Question 3 of 5</div>
+        <div class="question-tamil" id="q3TextTamil"></div>
+        <div class="question-english" id="q3TextEnglish"></div>
+      </div>
+
+      <div class="ad-slot"></div>
+
+      <div class="options" id="q3Options"></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="goToQuestion(4)" id="q3Btn" disabled>
+      Next Question →
+    </button>
+  </div>
+
+  <div id="question4" class="page">
+    <div>
+      <div class="question-header">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 80%;"></div>
+        </div>
+        <div class="question-number">Question 4 of 5</div>
+        <div class="question-tamil" id="q4TextTamil"></div>
+        <div class="question-english" id="q4TextEnglish"></div>
+      </div>
+
+      <div class="ad-slot"></div>
+
+      <div class="options" id="q4Options"></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="goToQuestion(5)" id="q4Btn" disabled>
+      Next Question →
+    </button>
+  </div>
+
+  <div id="question5" class="page">
+    <div>
+      <div class="question-header">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 100%;"></div>
+        </div>
+        <div class="question-number">Question 5 of 5 (Final)</div>
+        <div class="question-tamil" id="q5TextTamil"></div>
+        <div class="question-english" id="q5TextEnglish"></div>
+      </div>
+
+      <div class="ad-slot"></div>
+
+      <div class="options" id="q5Options"></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="calculateResult()" id="q5Btn" disabled>
+      View Result 🎉
+    </button>
+  </div>
+
+  <div id="loading" class="page">
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <div class="loading-text"><strong>உங்கள் பதில்களை பகுப்பாய்வு செய்கிறது...</strong><br>[Analyzing Your Answers...]</div>
+      <div class="loading-subtext">
+        This won't take long! 🧠✨
+      </div>
+    </div>
+  </div>
+
+  <div id="shareRequired" class="page">
+    <div>
+      <div class="share-requirement">
+        <div class="result-emoji" style="font-size: 48px;">🔒</div>
+        <h3>Share to Unlock Results!</h3>
+        <p style="font-size: 14px; margin-bottom: 16px; color: var(--text-light);">
+          <strong>உங்கள் முடிவைப் பார்க்க 3 நபர்களுடன் பகிரவும்!</strong><br>
+          [Share with 3 friends to see your results!]
+        </p>
+
+        <div class="share-counter">
+          <div class="share-count">
+            <div class="share-count-number" id="shareCount">0</div>
+            <div class="share-count-label">Shares Done</div>
+          </div>
+          <div class="share-count">
+            <div class="share-count-number">3</div>
+            <div class="share-count-label">Needed</div>
+          </div>
+        </div>
+
+        <p style="font-size: 13px; color: var(--text-light); margin-top: 16px; margin-bottom: 0;">
+          Help us grow! Share with friends & unlock exclusive results
+        </p>
+      </div>
+
+      <div class="ad-slot" style="margin-top: 24px;"></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <button class="btn btn-primary" onclick="shareViaWhatsApp()">
+        📱 Share on WhatsApp
+      </button>
+      <button class="btn btn-secondary" onclick="shareViaOther()">
+        📤 Share Another Way
+      </button>
+      <button class="btn btn-success" id="viewResultsBtn" onclick="viewResults()" style="display: none;">
+        ✅ View My Results
+      </button>
+    </div>
+  </div>
+
+  <div id="result" class="page">
+    <div>
+      <div class="result-card">
+        <div class="result-emoji" id="resultEmoji">🎉</div>
+        <h2 class="result-title" id="resultTitle">Genius</h2>
+        <p class="result-subtitle" id="resultMessage"></p>
+        <div class="score-display" id="scoreDisplay">145</div>
+
+        <div class="stats">
+          <div class="stat-item">
+            <div class="stat-label"><strong>பெயர்</strong> [Name]</div>
+            <div class="stat-value" id="resultName">User</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label"><strong>வயது</strong> [Age]</div>
+            <div class="stat-value" id="resultAge">25</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label"><strong>சரியான</strong> [Correct]</div>
+            <div class="stat-value" id="resultCorrect">5/5</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label"><strong>சதவீதம்</strong> [%ile]</div>
+            <div class="stat-value" id="resultPercentile">99%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-slot"></div>
+
+      <h3 style="margin: 24px 0 16px; font-size: 16px; font-weight: 700; color: var(--text);">
+        <strong>உங்கள் வெற்றியைப் பகிரவும்!</strong> [Share Your Success!] 🎊
+      </h3>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <button class="btn btn-primary" onclick="shareResultWhatsApp()">
+        📱 Share Result on WhatsApp
+      </button>
+      <button class="btn btn-secondary" onclick="goToPage('landing')">
+        <strong>மற்றொரு பரीக்ஷை</strong> [Try Another Test] →
+      </button>
+      <button class="btn btn-secondary" onclick="switchTest('personality'); goToPage('userDetails')">
+        💭 <strong>Personality Test</strong>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="aboutModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('about')">✕</button>
+    <h2 class="modal-title"><strong>MindLab பற்றி</strong> [About MindLab]</h2>
+    <div class="modal-text">
+      <p><strong>தமிழ்:</strong> MindLab உங்கள் அறிவாற்றலை சோதிக்க ஒரு தளம். IQ, ব்যক்তिత्व, மற்றும் பல்வேறு சோதனைகளை முயற்சி செய்யுங்கள்.</p>
+      <p><strong>English:</strong> MindLab is your platform for quick, fun cognitive assessments. Test your IQ, explore your personality, and share results with friends!</p>
+    </div>
+  </div>
+</div>
+
+<div id="privacyModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('privacy')">✕</button>
+    <h2 class="modal-title"><strong>தனியுரிமை</strong> [Privacy Policy]</h2>
+    <div class="modal-text">
+      <p><strong>Data Collection:</strong> We collect only the name, age, and test responses you provide.</p>
+      <p><strong>Data Usage:</strong> Your data helps us improve tests. No third-party selling.</p>
+      <p><strong>Sharing:</strong> Results are shared only if you choose to.</p>
+      <p><strong>Contact:</strong> privacy@mindlab.com</p>
+    </div>
+  </div>
+</div>
+
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('contact')">✕</button>
+    <h2 class="modal-title"><strong>தொடர்பு கொள்ளுங்கள்</strong> [Contact Us]</h2>
+    <div class="modal-text">
+      <p><strong>Email:</strong> hello@mindlab.com</p>
+      <p><strong>Support:</strong> Get help with questions or feedback</p>
+      <p><strong>Follow:</strong> Twitter • Instagram • Facebook</p>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentTest = 'iq';
+let answers = {};
+let userName = '';
+let userAge = '';
+let shareCount = 0;
+let testResults = null;
+
+const tests = {
+  iq: {
+    questions: [
+      {
+        tamil: "இந்த வரிசையில் என்ன வரும்? 2, 4, 8, 16, ?",
+        english: "[What comes next in this sequence? 2, 4, 8, 16, ?]",
+        options: [
+          { tamil: "24", english: "[24]" },
+          { tamil: "28", english: "[28]" },
+          { tamil: "32", english: "[32]" },
+          { tamil: "36", english: "[36]" }
+        ],
+        correct: 2
+      },
+      {
+        tamil: "ஒரு கடிகாரம் 3:15 ஐ காட்டினால், மணி மற்றும் நிமிட கைகளுக்கு இடையே உள்ள கோணம் என்ன?",
+        english: "[If a watch shows 3:15, what is the angle between the hour and minute hands?]",
+        options: [
+          { tamil: "7.5°", english: "[7.5°]" },
+          { tamil: "15°", english: "[15°]" },
+          { tamil: "22.5°", english: "[22.5°]" },
+          { tamil: "30°", english: "[30°]" }
+        ],
+        correct: 2
+      },
+      {
+        tamil: "ஒரு ரயில் 60 கிமீ/மணி வேகத்தில் செல்கிறது. 2 மணிநேரத்தில் எவ்வளவு தூரம் செல்கிறது?",
+        english: "[A train travels 60 km/h. How far does it go in 2 hours?]",
+        options: [
+          { tamil: "100 கிமீ", english: "[100 km]" },
+          { tamil: "110 கிமீ", english: "[110 km]" },
+          { tamil: "120 கிமீ", english: "[120 km]" },
+          { tamil: "130 கிமீ", english: "[130 km]" }
+        ],
+        correct: 2
+      },
+      {
+        tamil: "50 இன் 40% என்ன?",
+        english: "[What is 40% of 50?]",
+        options: [
+          { tamil: "15", english: "[15]" },
+          { tamil: "20", english: "[20]" },
+          { tamil: "25", english: "[25]" },
+          { tamil: "30", english: "[30]" }
+        ],
+        correct: 1
+      },
+      {
+        tamil: "ஒரு பெயல் முள்ளை 8 மணிக்கு நிரப்ப ஆரம்பிக்கிறது. இது நிறைய ஆவது 12 மணி. மூன்றாவது பெயல் முள்ளை 12 மணிக்கு வெடிக்கிறது. எவ்வளவு நீரில் வெடிக்கிறது?",
+        english: "[A bucket starts filling at 8 AM. It fills by 12 PM. A third hole opens at 12 PM. How much water leaks?]",
+        options: [
+          { tamil: "நிறைய ½", english: "[½ full]" },
+          { tamil: "¼ நிறைய", english: "[¼ full]" },
+          { tamil: "⅔ நிறைய", english: "[⅔ full]" },
+          { tamil: "⅓ நிறைய", english: "[⅓ full]" }
+        ],
+        correct: 0
+      }
+    ]
+  },
+  personality: {
+    questions: [
+      {
+        tamil: "சிக்கலை எதிர்கொள்ளும்போது, நீங்கள் பொதுவாக:",
+        english: "[When facing a problem, you usually:]",
+        options: [
+          { tamil: "உடனடியாக செயல்படுங்கள்", english: "[Act immediately]" },
+          { tamil: "கவனமாக திட்டமிடுங்கள்", english: "[Plan carefully]" },
+          { tamil: "ஆலோசனை கேளுங்கள்", english: "[Ask for advice]" },
+          { tamil: "தனியாக சிந்திக்கவும்", english: "[Think alone]" }
+        ],
+        correct: 1
+      },
+      {
+        tamil: "ஒரு குழுவில், நீங்கள் பொதுவாக:",
+        english: "[In a group, you are usually the:]",
+        options: [
+          { tamil: "தலைவர்", english: "[Leader]" },
+          { tamil: "கேட்பவர்", english: "[Listener]" },
+          { tamil: "ஆயோजகர்", english: "[Organizer]" },
+          { tamil: "பார்வையாளர்", english: "[Observer]" }
+        ],
+        correct: 1
+      },
+      {
+        tamil: "நீங்கள் வேலை செய்ய விரும்புகிறீர்கள்:",
+        english: "[You prefer to work:]",
+        options: [
+          { tamil: "தனியாக", english: "[Alone]" },
+          { tamil: "ஒருவருடன்", english: "[With one person]" },
+          { tamil: "குழுக்களில்", english: "[In teams]" },
+          { tamil: "பெரிய குழுக்களில்", english: "[In large groups]" }
+        ],
+        correct: 1
+      },
+      {
+        tamil: "ஒரு முடிவை எடுக்கும்போது:",
+        english: "[When making a decision:]",
+        options: [
+          { tamil: "உணர்ச்சியை பின்பற்றுங்கள்", english: "[Follow feelings]" },
+          { tamil: "தர்க்கத்தை பயன்படுத்தவும்", english: "[Use logic]" },
+          { tamil: "இரண்டையும் பாலன்சு செய்யவும்", english: "[Balance both]" },
+          { tamil: "அதை ஒதுக்கி விடுங்கள்", english: "[Postpone it]" }
+        ],
+        correct: 2
+      },
+      {
+        tamil: "ஒரு பெரிய মாற்றம் வந்தால் நீங்கள்:",
+        english: "[When a big change comes, you:]",
+        options: [
+          { tamil: "உடனடியாக ஏற்றுக்கொள்ளுங்கள்", english: "[Accept it quickly]" },
+          { tamil: "எதிர்ப்பு ஜெனரேட் செய்யுங்கள்", english: "[Resist it]" },
+          { tamil: "நேரம் எடுத்து பகுப்பாய்வு செய்யுங்கள்", english: "[Take time to analyze]" },
+          { tamil: "மற்றவர்களை கேளுங்கள்", english: "[Ask others]" }
+        ],
+        correct: 2
+      }
+    ]
+  },
+  luck: {
+    questions: [
+      {
+        tamil: "உங்கள் அதிர்ஷ்ட எண் என்ன? ஒன்றைத் தேர்ந்தெடுங்கள்:",
+        english: "[What's your lucky number? Pick one:]",
+        options: [
+          { tamil: "7", english: "[7]" },
+          { tamil: "13", english: "[13]" },
+          { tamil: "21", english: "[21]" },
+          { tamil: "42", english: "[42]" }
+        ],
+        correct: 0
+      },
+      {
+        tamil: "இன்றைய உங்கள் ஒப்பந்தம் சார்ந்திருக்கிறது:",
+        english: "[Your luck today depends on:]",
+        options: [
+          { tamil: "நேரம்", english: "[Timing]" },
+          { tamil: "மனோபாவம்", english: "[Attitude]" },
+          { tamil: "தேர்வுகள்", english: "[Choices]" },
+          { tamil: "சீரற்றவை", english: "[Randomness]" }
+        ],
+        correct: 1
+      },
+      {
+        tamil: "எப்போதாவது எதிர்பாராத நன்மையை அனுபவித்தீர்களா?",
+        english: "[Ever experienced unexpected good fortune?]",
+        options: [
+          { tamil: "மிகவும் அடிக்கடி", english: "[Very often]" },
+          { tamil: "சில நேரம்", english: "[Sometimes]" },
+          { tamil: "அரிதாக", english: "[Rarely]" },
+          { tamil: "ஒருபோதும் இல்லை", english: "[Never]" }
+        ],
+        correct: 1
+      },
+      {
+        tamil: "நீங்கள் தொলுக்க சாய்ந்து இருக்கிறீர்க்கள்:",
+        english: "[You tend to be:]",
+        options: [
+          { tamil: "மிகவும் அதிர்ஷ்ட", english: "[Very lucky]" },
+          { tamil: "சாதாரணமாக அதிர்ஷ்ட", english: "[Somewhat lucky]" },
+          { tamil: "சமநிலை", english: "[Neutral]" },
+          { tamil: "அதிர்ஷ்ட குறைவாக", english: "[Unlucky]" }
+        ],
+        correct: 1
+      },
+      {
+        tamil: "உங்கள் ஒப்பந்தம் மாறும் என்று நம்புகிறீர்கள்:",
+        english: "[Do you believe your luck can change?]",
+        options: [
+          { tamil: "முற்றிலும் ஆம்", english: "[Absolutely yes]" },
+          { tamil: "அநேகமாக", english: "[Probably]" },
+          { tamil: "தெரியாது", english: "[Not sure]" },
+          { tamil: "நாக்",  english: "[No]" }
+        ],
+        correct: 0
+      }
+    ]
+  }
+};
+
+function switchTest(testName) {
+  currentTest = testName;
+  shareCount = 0;
+}
+
+function goToPage(pageName) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageName).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function loadQuestions() {
+  const testData = tests[currentTest];
+  
+  for (let i = 1; i <= 5; i++) {
+    const q = testData.questions[i - 1];
+    document.getElementById(`q${i}TextTamil`).textContent = q.tamil;
+    document.getElementById(`q${i}TextEnglish`).textContent = q.english;
+    
+    const optionsDiv = document.getElementById(`q${i}Options`);
+    optionsDiv.innerHTML = '';
+    
+    q.options.forEach((opt, idx) => {
+      const div = document.createElement('div');
+      div.className = 'option';
+      div.innerHTML = `<div class="option-tamil"><strong>${opt.tamil}</strong></div><div class="option-english">${opt.english}</div>`;
+      div.onclick = () => selectOption(i, idx, div);
+      optionsDiv.appendChild(div);
+    });
+  }
+}
+
+function selectOption(qNum, optIdx, element) {
+  document.querySelectorAll(`#q${qNum}Options .option`).forEach(o => o.classList.remove('selected'));
+  element.classList.add('selected');
+  answers[qNum] = optIdx;
+  document.getElementById(`q${qNum}Btn`).disabled = false;
+}
+
+function startTest() {
+  userName = document.getElementById('userName').value.trim();
+  userAge = document.getElementById('userAge').value;
+  
+  if (!userName || userAge === 'Select age range') {
+    alert('Please fill all fields');
+    return;
+  }
+  
+  answers = {};
+  loadQuestions();
+  goToPage('question1');
+}
+
+function goToQuestion(qNum) {
+  goToPage(`question${qNum}`);
+}
+
+function calculateResult() {
+  goToPage('loading');
+  
+  setTimeout(() => {
+    const testData = tests[currentTest];
+    let correctCount = 0;
+    
+    for (let i = 1; i <= 5; i++) {
+      if (answers[i] === testData.questions[i - 1].correct) {
+        correctCount++;
+      }
+    }
+    
+    const percentage = (correctCount / 5) * 100;
+    const score = Math.round(80 + percentage * 0.8);
+    const percentile = Math.round(50 + percentage * 0.4);
+    
+    let title, emoji, message;
+    
+    if (percentage === 100) {
+      title = "天才 🔥 [Genius]";
+      emoji = "🔥";
+      message = "Perfect score! You're in the top 2%!";
+    } else if (percentage >= 80) {
+      title = "சிறந்த 😏 [Above Average]";
+      emoji = "😏";
+      message = "Excellent thinking skills!";
+    } else if (percentage >= 60) {
+      title = "மறைந்த பொருள் 😳 [Hidden Talent]";
+      emoji = "😳";
+      message = "Good potential - keep learning!";
+    } else {
+      title = "தொடர்ந்து வளர்ந்துக் 📚 [Keep Growing]";
+      emoji = "📚";
+      message = "Try again - practice makes perfect!";
+    }
+    
+    testResults = {
+      emoji: emoji,
+      title: title,
+      message: message,
+      score: score,
+      name: userName,
+      age: userAge,
+      correct: correctCount,
+      percentile: percentile
+    };
+    
+    shareCount = 0;
+    document.getElementById('shareCount').textContent = '0';
+    goToPage('shareRequired');
+  }, 2500);
+}
+
+function shareViaWhatsApp() {
+  shareCount++;
+  updateShareCount();
+  
+  const text = `🧠 I took the MindLab ${currentTest.toUpperCase()} Test! Can you beat my score? 🔥\n\nTake the test now and share your result!`;
+  const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+}
+
+function shareViaOther() {
+  shareCount++;
+  updateShareCount();
+  
+  if (navigator.share) {
+    navigator.share({
+      title: 'MindLab Test',
+      text: `🧠 I took the MindLab ${currentTest.toUpperCase()} Test! Can you beat my score? Take the test now!`
+    });
+  } else {
+    alert('Test link shared! Share with more friends to unlock your results.');
+  }
+}
+
+function updateShareCount() {
+  document.getElementById('shareCount').textContent = shareCount;
+  
+  if (shareCount >= 3) {
+    document.getElementById('viewResultsBtn').style.display = 'block';
+  }
+}
+
+function viewResults() {
+  document.getElementById('resultEmoji').textContent = testResults.emoji;
+  document.getElementById('resultTitle').textContent = testResults.title;
+  document.getElementById('resultMessage').textContent = testResults.message;
+  document.getElementById('scoreDisplay').textContent = testResults.score;
+  document.getElementById('resultName').textContent = testResults.name;
+  document.getElementById('resultAge').textContent = testResults.age;
+  document.getElementById('resultCorrect').textContent = `${testResults.correct}/5`;
+  document.getElementById('resultPercentile').textContent = `${testResults.percentile}%`;
+  
+  goToPage('result');
+}
+
+function shareResultWhatsApp() {
+  const text = `🎉 I scored ${testResults.score} IQ on MindLab! My result: ${testResults.title} 🔥\n\nCan you beat my score? Take the test now!`;
+  const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+}
+
+function openModal(type) {
+  document.getElementById(`${type}Modal`).classList.add('active');
+}
+
+function closeModal(type) {
+  document.getElementById(`${type}Modal`).classList.remove('active');
+}
+
+loadQuestions();
+</script>
+
+</body>
+</html>
